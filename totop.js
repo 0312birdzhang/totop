@@ -284,9 +284,12 @@ var qii404 = {
      * 渲染下部搜索页面
      */
     renderSearchPage: function(data) {
+        var width = (100/data.answers.length).toFixed(1)+"%";
         for (var i = 0; i < data.answers.length; i++) {
+            $('#iframe-container').html( '<iframe id="iframe'+i+'" width="'+width+'" height="1800px"></iframe>' + $('#iframe-container').html());
             $('#iframe'+i).attr('src', this.getSearchUrl(data.answers[i].value));
         }
+        // console.log($('#iframe-container').html());
     },
 
     /**
