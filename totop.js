@@ -139,7 +139,7 @@ var qii404 = {
             this_.answers = data.answers;
 
             this_.renderPage(data);
-            this_.analysisQuestion();
+            // this_.analysisQuestion();
         });
     },
 
@@ -163,8 +163,8 @@ var qii404 = {
         Mustache.parse(template);
         $('#question-container').html(Mustache.render(template, data));
 
-        this.analysisSingleSearch();
-        this.renderSearchPage(data.title);
+        // this.analysisSingleSearch();
+        this.renderSearchPage(data);
     },
 
     /**
@@ -283,8 +283,10 @@ var qii404 = {
     /**
      * 渲染下部搜索页面
      */
-    renderSearchPage: function(question) {
-        $('#iframe').attr('src', this.getSearchUrl(question));
+    renderSearchPage: function(data) {
+        for (var i = 0; i < data.answers.length; i++) {
+            $('#iframe'+i).attr('src', this.getSearchUrl(data.answers[i].value));
+        }
     },
 
     /**
@@ -324,9 +326,8 @@ var qii404 = {
      * 获取搜索url
      *
      */
-    getSearchUrl: function(question, answer) {
-        var suffix = answer ? (' ' + answer) : '';
-        return this.searchUrl + question.substring(question.indexOf('.') + 1) + suffix;
+    getSearchUrl: function(answer) {
+        return this.searchUrl + answer;
     },
 
     /**
